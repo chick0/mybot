@@ -76,7 +76,7 @@ class Cog(commands.Cog, name="코인상점"):
 
             if wl_point.point - (cn.price * count) >= 0:
                 wl.count += count
-                wl_point.point = wl_point.point - (cn.price * count)
+                wl_point.point -= cn.price * count
                 session.commit()
 
                 await ctx.reply(
@@ -87,7 +87,7 @@ class Cog(commands.Cog, name="코인상점"):
                     f"- 코인 거래 가격: {cn.price} P\n"
                     f"- 거래 후 보유중인 코인: {wl.count} 개\n"
                     "-----------------------------------\n"
-                    f"- 사용한 포인트 : {cn.price * count} P\n"
+                    f"- 변동 포인트 : -{cn.price * count} P\n"
                     f"- 거래 후 남은 포인트: {wl_point.point} P\n"
                     "-----------------------------------\n"
                     "```"
@@ -101,7 +101,7 @@ class Cog(commands.Cog, name="코인상점"):
                     f"- 코인 거래 가격: {cn.price} P\n"
                     f"- 거래 후 보유중인 코인: {wl.count} 개\n"
                     "-----------------------------------\n"
-                    f"- 사용한 포인트 : 0 P\n"
+                    f"- 변동 포인트 : -0 P\n"
                     f"- 거래 후 남은 포인트: {wl_point.point} P\n"
                     "-----------------------------------\n"
                     "```"
