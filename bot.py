@@ -6,7 +6,7 @@ from discord.ext.commands import AutoShardedBot
 
 
 bot = AutoShardedBot(
-    command_prefix="?"
+    command_prefix=";"
 )
 
 
