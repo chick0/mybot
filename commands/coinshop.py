@@ -42,26 +42,57 @@ class Cog(commands.Cog, name="코인상점"):
 
     @commands.command(help="코인 구매")
     @commands.cooldown(10, 30, commands.BucketType.guild)
-    async def buy(self, ctx: commands.context):
-        embed = Embed(
-            title="코인상점",
-            color=0x99FF99
-        )
-
+    async def buy(self, ctx: commands.context, code: str, count: int = 1):
         session_ = sessionmaker(bind=engine.get_engine())
         session = session_()
 
-        import coins
-        for coin in coins.__all__:
-            cn = session.query(Coin).filter_by(
-                name=getattr(getattr(coins, coin), "NAME")
+        if count <= 0:
+            count = 1
+
+        cn = session.query(Coin).filter_by(
+            name=code
+        ).first()
+        if cn is None:
+            await ctx.reply(
+                "등록된 코인이 아닙니다."
+            )
+        else:
+            wl = session.query(Wallet).filter_by(
+                name=code,
+                owner=ctx.author.id
             ).first()
 
-            embed.add_field(
-                name=getattr(getattr(coins, coin), "DISPLAY_NAME") + " 코인",
-                value=f"{cn.price} P"
-            )
+            if wl is None:
+                wl = Wallet()
+                wl.name = code
+                wl.owner = ctx.author.id
+                wl.count = 0
 
-        await ctx.send(
-            embed=embed
-        )
+                session.add(wl)
+
+            wl_point = session.query(Point).filter_by(
+                owner=ctx.author.id
+            ).first()
+
+            if wl_point.point - (cn.price * count) >= 0:
+                wl.count += count
+                wl_point.point = wl_point.point - (cn.price * count)
+                session.commit()
+
+                await ctx.reply(
+                    "구매 성공\n"
+                    "```\n"
+                    "-----------------------------------\n"
+                    f"- 거래한 코인: {count} 개\n"
+                    f"- 코인 거래 가격: {cn.price} P\n"
+                    f"- 거래 후 보유중인 코인: {wl.count} 개\n"
+                    "-----------------------------------\n"
+                    f"- 사용한 포인트 : {cn.price * count} P\n"
+                    f"- 거래 후 남은 포인트: {wl_point.point} P\n"
+                    "-----------------------------------\n"
+                    "```"
+                )
+            else:
+                await ctx.reply(
+                    "구매 실패"
+                )
