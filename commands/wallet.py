@@ -32,7 +32,10 @@ class Cog(commands.Cog, name="지갑"):
             owner=ctx.author.id
         ).all():
             embed.add_field(
-                name=getattr(getattr(coins, cn.name), "DISPLAY_NAME") + " 코인",
+                name="{name} 코인 ({code})".format(
+                    name=getattr(getattr(coins, cn.name), "DISPLAY_NAME"),
+                    code=getattr(getattr(coins, cn.name), "NAME")
+                ),
                 value=f"{cn.count} 개"
             )
 

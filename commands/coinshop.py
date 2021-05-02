@@ -15,6 +15,9 @@ class Cog(commands.Cog, name="코인상점"):
             title="코인상점",
             color=0x99FF99
         )
+        embed.set_footer(
+            text="괄호안에 텍스트는 거래코드 입니다 (거래코드는 구매&판매 할 때 사용됨)"
+        )
 
         session_ = sessionmaker(bind=engine.get_engine())
         session = session_()
@@ -26,7 +29,10 @@ class Cog(commands.Cog, name="코인상점"):
             ).first()
 
             embed.add_field(
-                name=getattr(getattr(coins, coin), "DISPLAY_NAME") + " 코인",
+                name="{name} 코인 ({code})".format(
+                    name=getattr(getattr(coins, coin), "DISPLAY_NAME"),
+                    code=getattr(getattr(coins, coin), "NAME")
+                ),
                 value=f"{cn.price} P"
             )
 
