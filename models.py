@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from sqlalchemy import Column
-from sqlalchemy import String, Integer
+from sqlalchemy import String, Integer, DateTime
 from sqlalchemy.orm import declarative_base
 
 Base = declarative_base()
@@ -73,3 +73,34 @@ class Point(Base):
 
     def __repr__(self):
         return f"<Point owner={self.owner}, point={self.point}>"
+
+
+class Gift(Base):
+    __tablename__ = "gift"
+
+    idx = Column(
+        Integer,
+        unique=True,
+        primary_key=True,
+        nullable=False
+    )
+
+    owner = Column(
+        Integer,
+        unique=True,
+        primary_key=True,
+        nullable=False
+    )
+
+    type = Column(
+        String(30),
+        nullable=False
+    )
+
+    date = Column(
+        DateTime,
+        nullable=False
+    )
+
+    def __repr__(self):
+        return f"<Gift owner={self.owner}, type={self.type!r}>"
