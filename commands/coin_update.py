@@ -36,6 +36,10 @@ class Cog(commands.Cog):
             if ctx.price < coin.MIN_PRICE:
                 ctx.price = coin.MIN_PRICE
 
+            if coin.MAX_PRICE is not None:
+                if ctx.price > coin.MAX_PRICE:
+                    ctx.price = coin.MAX_PRICE
+
             print(f"{ctx.name} : {ctx.price} / {symbol}{new_price}")
 
         session.commit()
