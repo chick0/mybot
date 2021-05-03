@@ -9,7 +9,7 @@ from models import Wallet, Point
 
 class Cog(commands.Cog, name="지갑"):
     @commands.command(help="지갑 확인")
-    @commands.cooldown(10, 30, commands.BucketType.guild)
+    @commands.cooldown(5, 30, commands.BucketType.guild)
     async def wallet(self, ctx: commands.context):
         embed = Embed(
             title="지갑",

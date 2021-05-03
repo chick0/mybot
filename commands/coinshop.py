@@ -41,7 +41,6 @@ class Cog(commands.Cog, name="코인상점"):
         )
 
     @commands.command(help="코인 구매")
-    @commands.cooldown(10, 30, commands.BucketType.guild)
     async def buy(self, ctx: commands.context, code: str, count: int = 1):
         session_ = sessionmaker(bind=engine.get_engine())
         session = session_()
@@ -108,7 +107,6 @@ class Cog(commands.Cog, name="코인상점"):
                 )
 
     @commands.command(help="코인 판매")
-    @commands.cooldown(10, 30, commands.BucketType.guild)
     async def sell(self, ctx: commands.context, code: str, count: int = 1):
         session_ = sessionmaker(bind=engine.get_engine())
         session = session_()
