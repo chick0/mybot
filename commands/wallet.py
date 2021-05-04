@@ -20,7 +20,7 @@ class Cog(commands.Cog, name="지갑"):
         session = session_()
 
         point = session.query(Point).filter_by(
-            owner=ctx.author.id
+            owner=str(ctx.author.id)
         ).first()
 
         point = point.point if point is not None else -1
@@ -29,7 +29,7 @@ class Cog(commands.Cog, name="지갑"):
 
         import coins
         for cn in session.query(Wallet).filter_by(
-            owner=ctx.author.id
+            owner=str(ctx.author.id)
         ).all():
             embed.add_field(
                 name="{name} 코인 ({code})".format(
@@ -49,7 +49,7 @@ class Cog(commands.Cog, name="지갑"):
         session = session_()
 
         point = session.query(Point).filter_by(
-                owner=ctx.author.id
+                owner=str(ctx.author.id)
         ).first()
         if point is not None:
             await ctx.reply(
@@ -57,7 +57,7 @@ class Cog(commands.Cog, name="지갑"):
             )
         else:
             point = Point()
-            point.owner = ctx.author.id
+            point.owner = str(ctx.author.id)
             point.point = 0
 
             session.add(point)

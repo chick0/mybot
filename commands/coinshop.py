@@ -60,19 +60,19 @@ class Cog(commands.Cog, name="코인상점"):
         else:
             wl = session.query(Wallet).filter_by(
                 name=code,
-                owner=ctx.author.id
+                owner=str(ctx.author.id)
             ).first()
 
             if wl is None:
                 wl = Wallet()
                 wl.name = code
-                wl.owner = ctx.author.id
+                wl.owner = str(ctx.author.id)
                 wl.count = 0
 
                 session.add(wl)
 
             wl_point = session.query(Point).filter_by(
-                owner=ctx.author.id
+                owner=str(ctx.author.id)
             ).first()
             if wl_point is None:
                 return await ctx.reply(
@@ -130,7 +130,7 @@ class Cog(commands.Cog, name="코인상점"):
         else:
             wl = session.query(Wallet).filter_by(
                 name=code,
-                owner=ctx.author.id
+                owner=str(ctx.author.id)
             ).first()
 
             if wl is None:
@@ -139,7 +139,7 @@ class Cog(commands.Cog, name="코인상점"):
                 )
 
             wl_point = session.query(Point).filter_by(
-                owner=ctx.author.id
+                owner=str(ctx.author.id)
             ).first()
             if wl_point is None:
                 return await ctx.reply(

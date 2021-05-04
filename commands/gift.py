@@ -10,11 +10,11 @@ from models import Point, Gift
 
 async def gift(session, ctx: commands.context, a: int, b: int):
     point = session.query(Point).filter_by(
-        owner=ctx.author.id
+        owner=str(ctx.author.id)
     ).first()
     if point is None:
         point = Point()
-        point.owner = ctx.author.id
+        point.owner = str(ctx.author.id)
         point.point = 0
         session.add(point)
 
