@@ -10,7 +10,7 @@ Base = declarative_base()
 class Wallet(Base):
     __tablename__ = "wallet"
 
-    wallet_idx = Column(
+    idx = Column(
         Integer,
         unique=True,
         primary_key=True,
@@ -78,7 +78,7 @@ class Point(Base):
 class Gift(Base):
     __tablename__ = "gift"
 
-    gift_idx = Column(
+    idx = Column(
         Integer,
         unique=True,
         primary_key=True,
@@ -87,8 +87,6 @@ class Gift(Base):
 
     owner = Column(
         String(50),
-        unique=True,
-        primary_key=True,
         nullable=False
     )
 
