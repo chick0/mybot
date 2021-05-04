@@ -13,7 +13,7 @@ class Cog(commands.Cog, name="지갑"):
     async def wallet(self, ctx: commands.context):
         embed = Embed(
             title="지갑",
-            color=0x99FF99
+            color=0xF7F7F7
         )
 
         session_ = sessionmaker(bind=engine.get_engine())

@@ -13,7 +13,7 @@ class Cog(commands.Cog, name="코인상점"):
     async def shop(self, ctx: commands.context):
         embed = Embed(
             title="코인상점",
-            color=0x99FF99
+            color=0xF7F7F7
         )
         embed.set_footer(
             text="괄호안에 텍스트는 거래코드 입니다 (거래코드는 구매&판매 할 때 사용됨)"
