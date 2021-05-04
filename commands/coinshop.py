@@ -133,7 +133,7 @@ class Cog(commands.Cog, name="코인상점"):
             ).first()
 
             if wl is None:
-                await ctx.reply(
+                return await ctx.reply(
                     "거래 기록이 없습니다"
                 )
 
