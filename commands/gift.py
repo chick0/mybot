@@ -30,6 +30,7 @@ async def gift(session, ctx: commands.context, a: int, b: int):
 class Cog(commands.Cog, name="선물 상자"):
     @commands.command(help="24시간 마다")
     async def daily(self, ctx: commands.context):
+        a, b = 300, 500
         gift_code = "24h"
 
         session_ = sessionmaker(bind=engine.get_engine())
@@ -47,20 +48,44 @@ class Cog(commands.Cog, name="선물 상자"):
 
             session.add(gift_stat)
             session.commit()
-            await gift(
-                session, ctx, a=300, b=500
-            )
+            await gift(session, ctx, a, b)
         else:
             if gift_stat.date <= datetime.now():
                 gift_stat.date = datetime.now() + timedelta(hours=24)
                 session.commit()
-                await gift(
-                    session, ctx, a=300, b=500
-                )
+                await gift(session, ctx, a, b)
             else:
                 await ctx.reply(
                     "아직 선물 상자가 도착하지 않았습니다"
                 )
 
+    @commands.command(help="7일 마다")
+    async def weekly(self, ctx: commands.context):
+        a, b = 500, 800
+        gift_code = "7d"
 
+        session_ = sessionmaker(bind=engine.get_engine())
+        session = session_()
 
+        gift_stat = session.query(Gift).filter_by(
+            owner=ctx.author.id,
+            type=gift_code
+        ).first()
+        if gift_stat is None:
+            gift_stat = Gift()
+            gift_stat.owner = ctx.author.id
+            gift_stat.type = gift_code
+            gift_stat.date = datetime.now() + timedelta(days=7)
+
+            session.add(gift_stat)
+            session.commit()
+            await gift(session, ctx, a, b)
+        else:
+            if gift_stat.date <= datetime.now():
+                gift_stat.date = datetime.now() + timedelta(days=7)
+                session.commit()
+                await gift(session, ctx, a, b)
+            else:
+                await ctx.reply(
+                    "아직 선물 상자가 도착하지 않았습니다"
+                )
