@@ -30,9 +30,10 @@ class Cog(commands.Cog, name="코인상점"):
             ).first()
 
             embed.add_field(
-                name="{name} 코인 ({code})".format(
+                name="{name} 코인 ({code}){star}".format(
                     name=getattr(getattr(coins, coin), "DISPLAY_NAME"),
-                    code=getattr(getattr(coins, coin), "NAME")
+                    code=getattr(getattr(coins, coin), "NAME"),
+                    star="*" if getattr(getattr(coins, coin), "MAX_PRICE") is None else ""
                 ),
                 value=f"{cn.price} P"
             )
