@@ -58,7 +58,7 @@ class Cog(commands.Cog, name="지갑"):
         else:
             point = Point()
             point.owner = ctx.author.id
-            point.point = 1500
+            point.point = 0
 
             session.add(point)
             session.commit()
