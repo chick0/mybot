@@ -20,7 +20,7 @@ class Cog(commands.Cog, name="리더보드"):
         session = session_()
 
         for i, x in enumerate(session.query(Point).order_by(
-            Point.point
+            Point.point.desc()
         ).limit(25).all()):
             embed.add_field(
                 name=f"{i + 1} 위",
