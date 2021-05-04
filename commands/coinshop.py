@@ -73,6 +73,10 @@ class Cog(commands.Cog, name="코인상점"):
             wl_point = session.query(Point).filter_by(
                 owner=ctx.author.id
             ).first()
+            if wl_point is None:
+                return await ctx.reply(
+                    "먼저 포인트 지갑을 만들어야 합니다"
+                )
 
             if wl_point.point - (cn.price * count) >= 0:
                 wl.count += count
@@ -136,6 +140,10 @@ class Cog(commands.Cog, name="코인상점"):
             wl_point = session.query(Point).filter_by(
                 owner=ctx.author.id
             ).first()
+            if wl_point is None:
+                return await ctx.reply(
+                    "먼저 포인트 지갑을 만들어야 합니다"
+                )
 
             if wl.count - count >= 0:
                 wl.count -= count
