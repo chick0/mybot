@@ -10,7 +10,7 @@ Base = declarative_base()
 class Wallet(Base):
     __tablename__ = "wallet"
 
-    idx = Column(
+    wallet_idx = Column(
         Integer,
         unique=True,
         primary_key=True,
@@ -78,7 +78,7 @@ class Point(Base):
 class Gift(Base):
     __tablename__ = "gift"
 
-    idx = Column(
+    gift_idx = Column(
         Integer,
         unique=True,
         primary_key=True,
