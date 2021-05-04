@@ -20,7 +20,7 @@ def upgrade():
     op.create_table(
         'gift',
         sa.Column('idx', sa.Integer, unique=True, primary_key=True, nullable=False),
-        sa.Column('owner', sa.Integer, nullable=False),
+        sa.Column('owner', sa.String(50), nullable=False),
         sa.Column('type', sa.String(30), nullable=False),
         sa.Column('date', sa.DateTime, nullable=False),
     )

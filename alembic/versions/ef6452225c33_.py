@@ -19,7 +19,7 @@ depends_on = None
 def upgrade():
     op.create_table(
         'point',
-        sa.Column('owner', sa.Integer, unique=True, primary_key=True, nullable=False),
+        sa.Column('owner', sa.String(50), unique=True, primary_key=True, nullable=False),
         sa.Column('point', sa.Integer, nullable=False),
     )
 

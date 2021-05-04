@@ -18,7 +18,7 @@ class Wallet(Base):
     )
 
     owner = Column(
-        Integer,
+        String(50),
         nullable=False
     )
 
@@ -60,7 +60,7 @@ class Point(Base):
     __tablename__ = "point"
 
     owner = Column(
-        Integer,
+        String(50),
         unique=True,
         primary_key=True,
         nullable=False
@@ -72,7 +72,7 @@ class Point(Base):
     )
 
     def __repr__(self):
-        return f"<Point owner={self.owner}, point={self.point}>"
+        return f"<Point owner={self.owner!r}, point={self.point}>"
 
 
 class Gift(Base):
@@ -86,7 +86,7 @@ class Gift(Base):
     )
 
     owner = Column(
-        Integer,
+        String(50),
         unique=True,
         primary_key=True,
         nullable=False
@@ -103,4 +103,4 @@ class Gift(Base):
     )
 
     def __repr__(self):
-        return f"<Gift owner={self.owner}, type={self.type!r}>"
+        return f"<Gift owner={self.owner!r}, type={self.type!r}>"

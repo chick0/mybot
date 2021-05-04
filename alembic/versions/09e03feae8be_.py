@@ -20,7 +20,7 @@ def upgrade():
     op.create_table(
         'wallet',
         sa.Column('idx', sa.Integer, unique=True, primary_key=True, nullable=False),
-        sa.Column('owner', sa.Integer, nullable=False),
+        sa.Column('owner', sa.String(50), nullable=False),
         sa.Column('name', sa.String(30), nullable=False),
         sa.Column('count', sa.Integer, nullable=False, default=0),
     )
