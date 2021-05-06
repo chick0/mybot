@@ -9,7 +9,6 @@ from models import Point
 
 class Cog(commands.Cog, name="리더보드"):
     @commands.command(help="순위 확인")
-    @commands.cooldown(10, 30, commands.BucketType.guild)
     async def leaderboard(self, ctx: commands.context):
         embed = Embed(
             title="리더보드",

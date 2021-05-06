@@ -5,7 +5,6 @@ from discord.ext import commands
 
 class Cog(commands.Cog, name="코인 정보"):
     @commands.command(help="코인 정보 확인")
-    @commands.cooldown(10, 30, commands.BucketType.guild)
     async def stat(self, ctx: commands.context, code: str = None):
         if code is None:
             return await ctx.reply(

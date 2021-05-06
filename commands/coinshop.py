@@ -9,7 +9,6 @@ from models import Coin, Wallet, Point
 
 class Cog(commands.Cog, name="코인상점"):
     @commands.command(help="시세 확인")
-    @commands.cooldown(10, 30, commands.BucketType.guild)
     async def shop(self, ctx: commands.context):
         embed = Embed(
             title="코인상점",
