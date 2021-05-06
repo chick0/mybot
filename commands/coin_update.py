@@ -1,3 +1,4 @@
+from datetime import datetime
 from random import choice, randint
 
 from discord.ext import tasks, commands
@@ -16,17 +17,19 @@ class Cog(commands.Cog):
     async def worker(self):
         session_ = sessionmaker(bind=engine.get_engine())
         session = session_()
+        date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
         import coins
         for coin in coins.__all__:
             coin = getattr(coins, coin)
 
-            symbol = choice(['-', '+', '-', '+', '-'])
-            new_price = randint(coin.MIN_RANGE, coin.MAX_RANGE)
-
             ctx = session.query(Coin).filter_by(
                 name=coin.NAME
             ).first()
+
+            symbol = choice(['-', '+', '-', '+', '-'])
+            old_price = ctx.price
+            new_price = randint(coin.MIN_RANGE, coin.MAX_RANGE)
 
             if symbol == "+":
                 ctx.price += new_price
@@ -40,6 +43,7 @@ class Cog(commands.Cog):
                 if ctx.price > coin.MAX_PRICE:
                     ctx.price = coin.MAX_PRICE
 
-            print(f"{ctx.name} : {ctx.price} / {symbol}{new_price}")
+            with open("coin_update.csv", mode="a", encoding="utf-8") as fp:
+                fp.write(f"{date}, {ctx.name}, {symbol}{new_price}, {old_price}, {ctx.price}\n")
 
         session.commit()
