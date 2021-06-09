@@ -1,4 +1,4 @@
-NAME = "crazy"
+NAME = "cz"
 DISPLAY_NAME = "미친"
 
 MIN_PRICE = 100000000

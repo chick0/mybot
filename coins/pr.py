@@ -1,4 +1,4 @@
-NAME = "pear"
+NAME = "pr"
 DISPLAY_NAME = "배"
 
 MIN_PRICE = 100000

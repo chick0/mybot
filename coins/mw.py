@@ -1,4 +1,4 @@
-NAME = "meow"
+NAME = "mw"
 DISPLAY_NAME = "야옹"
 
 MIN_PRICE = 300

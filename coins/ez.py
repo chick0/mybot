@@ -1,4 +1,4 @@
-NAME = "easy"
+NAME = "ez"
 DISPLAY_NAME = "쉬운"
 
 MIN_PRICE = 100

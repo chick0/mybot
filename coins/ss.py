@@ -1,4 +1,4 @@
-NAME = "sushi"
+NAME = "ss"
 DISPLAY_NAME = "스시"
 
 MIN_PRICE = 1000

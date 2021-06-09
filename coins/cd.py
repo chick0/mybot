@@ -1,4 +1,4 @@
-NAME = "candy"
+NAME = "cd"
 DISPLAY_NAME = "사탕"
 
 MIN_PRICE = 5000

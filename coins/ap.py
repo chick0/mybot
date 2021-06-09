@@ -1,4 +1,4 @@
-NAME = "apple"
+NAME = "ap"
 DISPLAY_NAME = "사과"
 
 MIN_PRICE = 300000

@@ -1,4 +1,4 @@
-NAME = "egg"
+NAME = "eg"
 DISPLAY_NAME = "달걀"
 
 MIN_PRICE = 30000
